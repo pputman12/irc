@@ -100,16 +100,7 @@ func main() {
                                         shutdown()
                                 }()
 
-                        } else if m.Command == "PRIVMSG" && c.FromChannel(m) {
-                                // Create a handler on all messages.
-                                c.WriteMessage(&irc.Message{
-                                        Command: "PRIVMSG",
-                                        Params: []string{
-                                                m.Params[0],
-                                                m.Trailing(),
-                                        },
-                                })
-                        }
+                        } 
                 }),
         }
         // Create the client
