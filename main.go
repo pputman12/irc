@@ -68,10 +68,7 @@ func main() {
 
         channel := "#gulag"
 
-        rangeStart := 0
-        rangeEnd := 10
-        offset := rangeEnd - rangeStart
-        randLength := seededRand.Intn(offset) + rangeStart
+        randLength := 30
 
         charSet := "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
         randString := StringWithCharset(randLength, charSet)
