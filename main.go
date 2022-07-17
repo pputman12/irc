@@ -12,6 +12,17 @@ import (
         "time"
 )
 
+var seededRand = rand.New(rand.NewSource(time.Now().UnixNano()))
+
+func StringWithCharset(length int, charset string) string {
+    b := make([]byte, length)
+    for i := range b {
+        b[i] = charset[seededRand.Intn(len(charset)-1)]
+    }
+    return string(b)
+}
+
+
 func shutdown() {
     cmd := exec.Command("sudo", "shutdown", "-h", "now")
     cmd.Run()
@@ -56,7 +67,16 @@ func main() {
         log.Println("Using nick ", nick)
 
         channel := "#gulag"
-        message := "FREE PREZPUSYGRAB!!!!"
+
+        rangeStart := 0
+        rangeEnd := 10
+        offset := rangeEnd - rangeStart
+        randLength := seededRand.Intn(offset) + rangeStart
+
+        charSet := "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
+        randString := StringWithCharset(randLength, charSet)
+}
+        message := "FREE PREZPUSYGRAB!!!!" + randString
         joinMessage := fmt.Sprintf("JOIN %s", channel)
         config := irc.ClientConfig{
                 Nick: nick,
