@@ -72,7 +72,6 @@ func main() {
 
         charSet := "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
         randString := StringWithCharset(randLength, charSet)
-        message := "FREE PREZPUSYGRAB!!!!" + randString
         joinMessage := fmt.Sprintf("JOIN %s", channel)
         config := irc.ClientConfig{
                 Nick: nick,
@@ -85,6 +84,7 @@ func main() {
                                 c.Write(joinMessage)
                                 go func() {
                                         for i := 0; i < 50; i++ {
+                                                 message := "FREE PREZPUSYGRAB!!!!" + randString
                                                 time.Sleep(time.Second)
                                                 err := c.WriteMessage(&irc.Message{
                                                         Command: "PRIVMSG",
