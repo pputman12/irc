@@ -12,10 +12,20 @@ import (
         "time"
 )
 
+func shutdown() {
+    cmd := exec.Command("sudo", "shutdown", "-h", "now")
+    cmd.Run()
+    err := cmd.Run()
+    if err != nil {
+            fmt.Println(err)
+    }
+}
+
+
 func readLines(path string) ([]string, error) {
         file, err := os.Open(path)
         if err != nil {
-                return nil, err
+            shutdown()
         }
         defer file.Close()
 
@@ -30,13 +40,13 @@ func readLines(path string) ([]string, error) {
 func main() {
         conn, err := net.Dial("tcp", "irc.undernet.org:6667")
         if err != nil {
-                log.Fatalln(err)
+            shutdown()
         }
 
         words, err := readLines("words.txt")
 
         if err != nil {
-                log.Fatalln(err)
+            shutdown()
         }
 
         rand.Seed(time.Now().UTC().UnixNano())
@@ -60,20 +70,18 @@ func main() {
                                 go func() {
                                         for i := 0; i < 50; i++ {
                                                 time.Sleep(time.Second)
-                                                c.WriteMessage(&irc.Message{
+                                                err := c.WriteMessage(&irc.Message{
                                                         Command: "PRIVMSG",
                                                         Params: []string{
                                                                 channel,
                                                                 message,
                                                         },
                                                 })
+                                                if err != nil {
+                                                    shutdown()                                                    
+                                                }
                                         }
-                                        cmd := exec.Command("sudo", "shutdown", "-h", "now")
-                                        cmd.Run()
-                                        err := cmd.Run()
-                                        if err != nil {
-                                                fmt.Println(err)
-                                        }
+                                        shutdown()
                                 }()
 
                         } else if m.Command == "PRIVMSG" && c.FromChannel(m) {
@@ -92,6 +100,6 @@ func main() {
         client := irc.NewClient(conn, config)
         err = client.Run()
         if err != nil {
-                log.Fatalln(err)
+                shutdown()
         }
 }
