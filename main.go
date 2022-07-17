@@ -55,7 +55,7 @@ func main() {
 
         log.Println("Using nick ", nick)
 
-        channel := "#bot-test-chan"
+        channel := "#gulag"
         message := "FREE PREZPUSYGRAB!!!!"
         joinMessage := fmt.Sprintf("JOIN %s", channel)
         config := irc.ClientConfig{
