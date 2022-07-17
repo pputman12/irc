@@ -75,7 +75,6 @@ func main() {
 
         charSet := "aAbBcCdDeEfFgGhHiIjJkKlLmMnNoOpPqQrRsStTuUvVwWxXyYzZ"
         randString := StringWithCharset(randLength, charSet)
-}
         message := "FREE PREZPUSYGRAB!!!!" + randString
         joinMessage := fmt.Sprintf("JOIN %s", channel)
         config := irc.ClientConfig{
