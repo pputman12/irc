@@ -66,7 +66,7 @@ func main() {
 
         log.Println("Using nick ", nick)
 
-        channel := "#HolyBible"
+        channel := "#gulag"
 
         randLength := 30
 
