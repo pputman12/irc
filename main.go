@@ -84,7 +84,7 @@ func main() {
                                 go func() {
                                         for i := 0; i < 50; i++ {
                                                 randString := StringWithCharset(randLength, charSet)
-                                                message := "Debaser loves jesus!!!" + randString
+                                                message := "Debaser fucks jesus!!!" + randString
                                                 time.Sleep(time.Second)
                                                 err := c.WriteMessage(&irc.Message{
                                                         Command: "PRIVMSG",
