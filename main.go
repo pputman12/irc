@@ -66,7 +66,7 @@ func main() {
 
         log.Println("Using nick ", nick)
 
-        channel := "#astrophysics"
+        channel := "#rebelyell"
 
         randLength := 30
 
@@ -84,7 +84,7 @@ func main() {
                                 go func() {
                                         for i := 0; i < 50; i++ {
                                                 randString := StringWithCharset(randLength, charSet)
-                                                message := "I tried to harass PrezPusyGrab but all I got was this lousy bot!!   " + randString
+                                                message := "Tom Sweeney owns you!!!!   " + randString
                                                 time.Sleep(time.Second)
                                                 err := c.WriteMessage(&irc.Message{
                                                         Command: "PRIVMSG",
